@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block pagetitle %}
+    Department
+{% endblock pagetitle %}
+
+{% block breadcumb %}
+    Department Page
+{% endblock breadcumb %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="white-box">
+                <h3 class="box-title">List of courses</h3>
+                <div class="table-responsive">
+                    <table class="table text-nowrap">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">#</th>
+                                <th class="border-top-0">Course Name</th>
+                                <th class="border-top-0">From Semester</th>
+                                <th class="border-top-0">Instructor</th>
+                                <th class="border-top-0">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for course in courses %}
+                                <tr>
+                                    <td>{{ course.id }}</td>
+                                    <td>{{ course.name }}</td>
+                                    <td>{{ course.created }}</td>
+                                    <td>{{ course.updated }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+

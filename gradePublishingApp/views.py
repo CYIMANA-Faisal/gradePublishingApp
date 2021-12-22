@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from myapp.models import Department
-from myapp.models import Student
+from myapp.models import Department, Student, Course
+
 
 
 def home(request):
@@ -8,18 +8,33 @@ def home(request):
 
 
 def dashboard(request):
-    num_of_departments = Department.objects.all().count()
-    num_of_students = Student.objects.all().count()
-    print(num_of_departments)
+    departments = Department.objects.all()
+    students = Student.objects.all()
     context = {
-        num_of_departments: num_of_departments,
-        num_of_students: num_of_students,
+        'departments': len(departments),
+        'students': students,
     }
     return render(request, 'dashboard.html', context)
 
 
 def profile(request):
     return render(request, 'profile.html')
+
+
+def department(request):
+    departments = Department.objects.all()
+    context = {
+        'departments': departments,
+    }
+    return render(request, 'departments.html', context)
+
+
+def courses(request):
+    courses = Course.objects.all()
+    context = {
+        'courses': courses,
+    }
+    return render(request, 'courses.html', context)
 
 
 def page_not_found_view(request, exception):

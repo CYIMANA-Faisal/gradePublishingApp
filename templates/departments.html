@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block pagetitle %}
+    Department
+{% endblock pagetitle %}
+
+{% block breadcumb %}
+    Department Page
+{% endblock breadcumb %}
+
+{% block cards %}
+    {% include 'department-cards.html' %}
+{% endblock cards %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="white-box">
+                <h3 class="box-title">List of departments</h3>
+                <div class="table-responsive">
+                    <table class="table text-nowrap">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">#</th>
+                                <th class="border-top-0">Department Name</th>
+                                <th class="border-top-0">Created At</th>
+                                <th class="border-top-0">Updated At</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for department in departments %}
+                                <tr>
+                                    <td>{{ department.id }}</td>
+                                    <td>{{ department.name }}</td>
+                                    <td>{{ department.created }}</td>
+                                    <td>{{ department.updated }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
