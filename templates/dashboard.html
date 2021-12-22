@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block pagetitle %}
+    Dashboard
+{% endblock pagetitle %}
+
+{% block breadcumb %}
+    Dashboard page
+{% endblock breadcumb %}
+
+{% block cards %}
+    {% include 'cards.html' %}
+{% endblock cards %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+          <div class="white-box">
+            <h3 class="box-title">Dashboard content</h3>
+          </div>
+        </div>
+    </div>
+{% endblock content %}
+
