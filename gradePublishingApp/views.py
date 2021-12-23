@@ -29,12 +29,25 @@ def department(request):
     return render(request, 'departments.html', context)
 
 
+def departmentAdd(request):
+    context = {
+    }
+    return render(request, 'add-department.html', context)
+
+
 def courses(request):
     courses = Course.objects.all()
     context = {
         'courses': courses,
     }
     return render(request, 'courses.html', context)
+
+
+def addCourse(request):
+
+    context = {
+    }
+    return render(request, 'add-course.html', context)
 
 
 def page_not_found_view(request, exception):

@@ -7,15 +7,15 @@
     Department Page
 {% endblock breadcumb %}
 
-{% block cards %}
-    {% include 'department-cards.html' %}
-{% endblock cards %}
-
 {% block content %}
     <div class="row">
         <div class="col-sm-12">
             <div class="white-box">
-                <h3 class="box-title">List of departments</h3>
+                <div class="col-lg-4 col-md-12">
+                    <div class="white-box analytics-info">
+                        <a href="/departments/add" class="btn d-grid btn-success text-white" target="_blank">+ Add department</a>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table text-nowrap">
                         <thead>
