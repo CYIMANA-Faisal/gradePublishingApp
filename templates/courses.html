@@ -4,41 +4,23 @@
 {% endblock pagetitle %}
 
 {% block breadcumb %}
-    Department Page
+    Courses Page
 {% endblock breadcumb %}
 
 {% block content %}
     <div class="row">
         <div class="col-sm-12">
             <div class="white-box">
-                <div class="col-lg-4 col-md-12">
-                    <div class="white-box analytics-info">
-                        <a href="/courses/add" class="btn d-grid btn-success text-white" target="_blank">+ Add course</a>
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <table class="table text-nowrap">
-                        <thead>
-                            <tr>
-                                <th class="border-top-0">#</th>
-                                <th class="border-top-0">Course Name</th>
-                                <th class="border-top-0">From Semester</th>
-                                <th class="border-top-0">Instructor</th>
-                                <th class="border-top-0">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for course in courses %}
-                                <tr>
-                                    <td>{{ course.id }}</td>
-                                    <td>{{ course.name }}</td>
-                                    <td>{{ course.created }}</td>
-                                    <td>{{ course.updated }}</td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+                {% if not courses %}
+                    <ul class="list-group">
+                            <li class="list-group-item">No courses available</li>
+                    </ul>
+                {% endif %}
+                <ul class="list-group">
+                    {% for course in courses %}
+                        <li class="list-group-item"><a href="">{{ course.code }}</a></li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>

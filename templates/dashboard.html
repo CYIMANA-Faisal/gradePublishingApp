@@ -7,15 +7,16 @@
     Dashboard page
 {% endblock breadcumb %}
 
-{% block cards %}
-    {% include 'cards.html' %}
-{% endblock cards %}
 
 {% block content %}
     <div class="row">
         <div class="col-md-12">
           <div class="white-box">
-                <h3 class="box-title">Dashboard contents</h3>
+                <ul class="list-group">
+                    {% for school in schools %}
+                        <li class="list-group-item"><a href="{% url 'departments' school_id=school.id %}">{{ school.name }}</a></li>
+                    {% endfor %}
+                </ul>
           </div>
         </div>
     </div>

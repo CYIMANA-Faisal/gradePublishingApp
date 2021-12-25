@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from myapp.models import Department, Student, Course
+from myapp.models import Department, Course, School
 
 
 
@@ -8,11 +8,9 @@ def home(request):
 
 
 def dashboard(request):
-    departments = Department.objects.all()
-    students = Student.objects.all()
+    schools = School.objects.all()
     context = {
-        'departments': len(departments),
-        'students': students,
+        'schools': schools,
     }
     return render(request, 'dashboard.html', context)
 
@@ -21,12 +19,18 @@ def profile(request):
     return render(request, 'profile.html')
 
 
-def department(request):
-    departments = Department.objects.all()
+def departments(request, school_id):
+    departments = Department.objects.filter(school=school_id)
+    school = School.objects.get(id=school_id)
     context = {
         'departments': departments,
+        'school_name': school.name
     }
     return render(request, 'departments.html', context)
+
+
+def levels(request, dep_id):
+    return render(request, 'level.html', {'department_id': dep_id})
 
 
 def departmentAdd(request):
@@ -35,7 +39,7 @@ def departmentAdd(request):
     return render(request, 'add-department.html', context)
 
 
-def courses(request):
+def courses(request, dep_id, level):
     courses = Course.objects.all()
     context = {
         'courses': courses,

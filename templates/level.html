@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block pagetitle %}
+    Levels
+{% endblock pagetitle %}
+
+{% block breadcumb %}
+    Levels
+{% endblock breadcumb %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+          <div class="white-box">
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="{% url 'courses' dep_id=department_id level='One' %}">Level 1 (Year 1)</a></li>
+                    <li class="list-group-item"><a href="{% url 'courses' dep_id=department_id level='Two' %}">Level 1 (Year 2)</a></li>
+                    <li class="list-group-item"><a href="{% url 'courses' dep_id=department_id level='Three' %}">Level 1 (Year 3)</a></li>
+                    <li class="list-group-item"><a href="{% url 'courses' dep_id=department_id level='Four' %}">Level 1 (Year 4)</a></li>
+                </ul>
+          </div>
+        </div>
+    </div>
+{% endblock content %}
+

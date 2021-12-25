@@ -11,33 +11,17 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="white-box">
-                <div class="col-lg-4 col-md-12">
-                    <div class="white-box analytics-info">
-                        <a href="/departments/add" class="btn d-grid btn-success text-white" target="_blank">+ Add department</a>
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <table class="table text-nowrap">
-                        <thead>
-                            <tr>
-                                <th class="border-top-0">#</th>
-                                <th class="border-top-0">Department Name</th>
-                                <th class="border-top-0">Created At</th>
-                                <th class="border-top-0">Updated At</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for department in departments %}
-                                <tr>
-                                    <td>{{ department.id }}</td>
-                                    <td>{{ department.name }}</td>
-                                    <td>{{ department.created }}</td>
-                                    <td>{{ department.updated }}</td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+                <h3>List of Departments in: {{school_name}} </h3>
+                {% if not departments %}
+                    <ul class="list-group">
+                            <li class="list-group-item">No department available</li>
+                    </ul>
+                {% endif %}
+                <ul class="list-group">
+                    {% for department in departments %}
+                        <li class="list-group-item"><a href="{% url 'levels' dep_id=department.id %}">{{ department.name }}</a></li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
