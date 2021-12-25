@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>GradePub</title>
     <style>
 
@@ -106,7 +107,7 @@
             overflow: hidden;
             width: 768px;
             max-width: 100%;
-            min-height: 500px;
+            min-height: 650px;
         }
 
         .form-container {
@@ -261,32 +262,61 @@
     </style>
 </head>
 <body>
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{message}}
+      </div>
+    {% else %}
+
+        {% if message %}
+        <div class="alert alert-success" role="alert">
+            {{message}}
+        </div>
+        
+        {% else %}
+        <span></span>
+        {% endif %}
+        
+    {% endif %}
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="#">
+            <form action="{% url 'registration' %}" method="POST">
+                {% csrf_token %}
                 <h1>Create Account</h1>
-                <input type="text" name="email" placeholder="Names" />
-                <input type="email" name="email" placeholder="Email" />
-                <input type="password" name="email" placeholder="Password" />
-                <input type="text" name="email" placeholder="Registration Number" />
-                <select>
-                    <option>Student</option>
-                    <option>Lecture</option>
+                <input type="text" name="names" placeholder="Names" required/>
+                <input type="email" name="email" placeholder="Email" required/>
+                <input type="password" name="password" placeholder="Password" required/>
+                <input type="text" name="reg_number" placeholder="Registration Number" />
+                <select name="department" required>
+                    <option value="">Select Department</option>
+                    {% for department in departments %}
+                    <option value="{{department.id}}">{{department.name}}</option>
+                    {% endfor %}
+                    
                 </select>
-                <select>
-                    <option>Level 1</option>
-                    <option>Level 2</option>
-                    <option>Level 3</option>
-                    <option>Level 4</option>
+                <select name="group" required>
+                    <option value="">Select Group</option>
+                    {% for group in groups %}
+                    <option value="{{group.id}}">{{group.name}}</option>
+                    {% endfor %}
+                    
+                </select>
+                <select name="level">
+                    <option value="">Select Level</option>
+                    <option value="1">Level 1</option>
+                    <option value="2">Level 2</option>
+                    <option value="3">Level 3</option>
+                    <option value="4">Level 4</option>
                 </select>
                 <button>Sign Up</button>
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form action="#">
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
                 <h1>Sign in</h1>
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
+                <input type="email" name="email" placeholder="Email" required/>
+                <input type="password" name="password" placeholder="Password" required/>
 <!--                <a href="#">Forgot your password?</a>-->
                 <button>Sign In</button>
             </form>

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block pagetitle %}
-    Department
+    Courses
 {% endblock pagetitle %}
 
 {% block breadcumb %}
@@ -11,16 +11,75 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="white-box">
-                {% if not courses %}
-                    <ul class="list-group">
-                            <li class="list-group-item">No courses available</li>
+                <div class="card text-center">
+                    <div class="card-header">
+                       
+                        {% ifequal sem_id '1' %}
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                              <a class="nav-link active" href="{% url 'courses' dep_id=dep_id level=level sem_id='1' %}">Semester 1</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="{% url 'courses' dep_id=dep_id level=level sem_id='2' %}">Semester 2</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="{% url 'courses' dep_id=dep_id level=level sem_id='3' %}">Semester 3</a>
+                            </li>
+                          </ul>
+                        {% endifequal %}
+                        {% ifequal sem_id '2' %}
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                              <a class="nav-link" href="{% url 'courses' dep_id=dep_id level=level sem_id='1' %}">Semester 1</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link active" href="{% url 'courses' dep_id=dep_id level=level sem_id='2' %}">Semester 2</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="{% url 'courses' dep_id=dep_id level=level sem_id='3' %}">Semester 3</a>
+                            </li>
+                          </ul>
+                        {% endifequal %}
+                        {% ifequal sem_id '3' %}
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                              <a class="nav-link" href="{% url 'courses' dep_id=dep_id level=level sem_id='1' %}">Semester 1</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="{% url 'courses' dep_id=dep_id level=level sem_id='2' %}">Semester 2</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link active" href="{% url 'courses' dep_id=dep_id level=level sem_id='3' %}">Semester 3</a>
+                            </li>
+                          </ul>
+                        {% endifequal %}
+                    </div>
+                    <div class="card-body">
+                        {% if not courses %}
+                        <ul class="list-group">
+                                <li class="list-group-item">No courses available</li>
+                        </ul>
+                        {% endif %}
+                        <ul class="list-group">
+                            <div class="row">
+                                {% for course in courses %}
+                            <div class="card col-sm-4 " style="width: 18rem; border: 1px solid grey; border-radius: 10px;margin-right:6%">
+                                <div class="card-body">
+                                <h5 class="card-title">{{ course.code }}</h5>
+                                {% if request.user.id in grade_ids%}
+                                <a href="#" class="btn btn-success">Go to course</a>
+                                {% else %}
+                                <a href="#" class="btn btn-primary">Enroll now</a>
+                                {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                            </div>
+                        
                     </ul>
-                {% endif %}
-                <ul class="list-group">
-                    {% for course in courses %}
-                        <li class="list-group-item"><a href="">{{ course.code }}</a></li>
-                    {% endfor %}
-                </ul>
+                    </div>
+                  </div>
+               
             </div>
         </div>
     </div>

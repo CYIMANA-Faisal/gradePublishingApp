@@ -1,6 +1,17 @@
 from django.contrib import admin
-from .models import Department, Course, Grade, School
+from .models import Department, Course, Grade, School, User, Group
 
+
+
+class UserAdmin(admin.ModelAdmin):
+    model = User
+    fields = ['names', 'email','reg_number', 'level', 'password','group','admin','staff','active','department']
+    list_display = ('id', 'names', 'email','reg_number', 'level', 'password','group','admin','staff','active','department')
+
+class GroupAdmin(admin.ModelAdmin):
+    model = Group
+    fields = ['name']
+    list_display = ('id', 'name')
 
 class SchoolAdmin(admin.ModelAdmin):
     model = School
@@ -30,6 +41,8 @@ admin.site.register(Department, DepartmentAdmin)
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Grade, GradeAdmin)
 admin.site.register(School, SchoolAdmin)
+admin.site.register(User, UserAdmin)
+admin.site.register(Group, GroupAdmin)
 
 
 
