@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Department, Course, Grade, School, User, Group
+from .models import Department, Course, Grade, School, User, Group, Claim
 
 
 
@@ -11,7 +11,7 @@ class UserAdmin(admin.ModelAdmin):
 class GroupAdmin(admin.ModelAdmin):
     model = Group
     fields = ['name']
-    list_display = ('id', 'name')
+    list_display = ('id', 'name', 'created_at', 'updated_at')
 
 class SchoolAdmin(admin.ModelAdmin):
     model = School
@@ -27,8 +27,14 @@ class DepartmentAdmin(admin.ModelAdmin):
 
 class CourseAdmin(admin.ModelAdmin):
     model = Course
-    fields = ['code', 'level',  'academic_year', 'department', 'instructor', 'semester', 'enrollment_key']
-    list_display = ('code', 'level', 'academic_year', 'department', 'instructor', 'semester', 'enrollment_key', 'created_at', 'updated_at')
+    fields = ['code', 'level',  'academic_year', 'department', 'instructor', 'semester', 'enrollment_key', 'published']
+    list_display = ('code', 'level', 'academic_year', 'department', 'instructor', 'semester', 'enrollment_key', 'published', 'created_at', 'updated_at')
+
+
+class ClaimAdmin(admin.ModelAdmin):
+    model = Claim
+    fields = ['student', 'course', 'reason', 'payment_slip']
+    list_display = ('id', 'student', 'course', 'reason', 'payment_slip', 'created_at', 'updated_at')
 
 
 class GradeAdmin(admin.ModelAdmin):
@@ -43,6 +49,7 @@ admin.site.register(Grade, GradeAdmin)
 admin.site.register(School, SchoolAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Group, GroupAdmin)
+admin.site.register(Claim, ClaimAdmin)
 
 
 

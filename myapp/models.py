@@ -4,12 +4,15 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 
 class Group(models.Model):
     name = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
 
+
 class UserManager(BaseUserManager):
-    def create_user(self, email, names=None,group=None,department=None, password=None,level=None, reg_number=None,  is_active=True, is_staff=False, is_admin=False):
+    def create_user(self, email, names=None,group=5,department=None, password=None,level=None, reg_number=None,  is_active=True, is_staff=False, is_admin=False):
         if not email:
             raise ValueError('Users must have a valid email')
         if not names:
@@ -32,13 +35,13 @@ class UserManager(BaseUserManager):
         user_obj.save(using=self._db)
         return user_obj
 
-    def create_staffuser(self, email, names=None,group=None,department=None, level=None, reg_number=None, password=None):
+    def create_staffuser(self, email, names=None,group=1,department=None, level=None, reg_number=None, password=None):
         user = self.create_user(
             email, names=names,group=group,department=department,level=level, reg_number=reg_number, password=password, is_staff=True)
         return user
 
-    def create_superuser(self, email, names=None,group=None,department=None, level=None, reg_number=None, password=None):
-        user = self.create_user(email, names="sdfsdaf",level='asdfsdf',group='group',department='department', reg_number='asdfdfs',
+    def create_superuser(self, email, names=None,group=1,department=None, level=None, reg_number=None, password=None):
+        user = self.create_user(email, names="admin",level='0',group=group,department='department', reg_number='None',
                                 password=password, is_staff=True, is_admin=True)
         return user
 
@@ -129,11 +132,24 @@ class Course(models.Model):
     instructor = models.ForeignKey(User, on_delete=models.CASCADE)
     semester = models.CharField(max_length=50, choices=SEMESTER)
     enrollment_key = models.CharField(max_length=10)
+    published = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.code
+
+
+class Claim(models.Model):
+    student = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)
+    reason = models.CharField(max_length=10000)
+    payment_slip = models.CharField(max_length=5000)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.student
 
 
 class Grade(models.Model):
