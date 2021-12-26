@@ -297,7 +297,9 @@
                 <select name="group" required>
                     <option value="">Select Group</option>
                     {% for group in groups %}
-                    <option value="{{group.id}}">{{group.name}}</option>
+                        {% ifnotequal group.id 1 %}
+                            <option value="{{group.id}}">{{group.name}}</option>
+                        {% endifnotequal %}
                     {% endfor %}
                     
                 </select>

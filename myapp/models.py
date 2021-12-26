@@ -41,6 +41,7 @@ class UserManager(BaseUserManager):
             level=None,
             reg_number=None,
             is_active=True,
+            is_approved=False,
             is_staff=False,
             is_admin=False
     ):
@@ -65,6 +66,7 @@ class UserManager(BaseUserManager):
         user_obj.department = my_department
         user_obj.reg_number = reg_number
         user_obj.admin = is_admin
+        user_obj.is_approved = is_approved
         user_obj.active = is_active
         user_obj.save(using=self._db)
         return user_obj
@@ -79,6 +81,7 @@ class UserManager(BaseUserManager):
             level=None,
             reg_number=None,
             is_active=True,
+            is_approved=True,
             is_staff=True,
             is_admin=False
     ):
@@ -91,6 +94,7 @@ class UserManager(BaseUserManager):
             level=level,
             reg_number=reg_number,
             is_active=is_active,
+            is_approved=False,
             is_staff=is_staff,
             is_admin=is_admin
         )
@@ -107,6 +111,7 @@ class UserManager(BaseUserManager):
             reg_number=None,
             is_active=True,
             is_staff=True,
+            is_approved=True,
             is_admin=True
     ):
         user = self.create_user(
@@ -119,6 +124,7 @@ class UserManager(BaseUserManager):
             reg_number=reg_number,
             is_active=is_active,
             is_staff=is_staff,
+            is_approved=is_approved,
             is_admin=is_admin
         )
         return user
@@ -132,6 +138,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, blank=True)
     reg_number = models.CharField(max_length=255, unique=True, null=True, blank=True)
     active = models.BooleanField(default=True)
+    is_approved = models.BooleanField(default=False)
     staff = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
 

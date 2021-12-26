@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block pagetitle %}
+    Grades
+{% endblock pagetitle %}
+
+{% block breadcumb %}
+    Grades
+{% endblock breadcumb %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+          <div class="white-box">
+            
+            <div class="table-responsive">
+                <table class="table text-nowrap">
+                    <thead>
+                        <tr>
+                            <th class="border-top-0">Course</th>
+                            <th class="border-top-0">Cat marks</th>
+                            <th class="border-top-0">Exam marks</th>
+                            <th class="border-top-0">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for grade in grades %}
+                        {% with total=grade.cat|add:grade.exam %}
+                        <tr>
+                            <td>{{grade.course.code}}</td>
+                            <td>{{grade.cat}}</td>
+                            <td>{{grade.exam}}</td>
+                            {% if total > 50 %}
+                                <td><a class="btn btn-success" disabled>Pass</a></td>
+                            {% else %}
+                                <td><a class="btn btn-danger" disabled>Fail</a></td>
+                            {% endif %}
+                        </tr>
+                         {% endwith %}
+                        {% endfor %}
+                        
+                        
+                    </tbody>
+                </table>
+            </div>
+          </div>
+        </div>
+    </div>
+{% endblock content %}
+

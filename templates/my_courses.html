@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block pagetitle %}
+    Courses Registered
+{% endblock pagetitle %}
+
+{% block breadcumb %}
+   My Courses
+{% endblock breadcumb %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            {% if courses %}
+            {% for course in courses %}
+
+            <div class="card col-sm-4 " style="width: 18rem; border: 1px solid grey; border-radius: 10px;margin-right:6%">
+                <div class="card-body">
+                <h5 class="card-title">{{ course.code }}</h5>
+                <a href="#" class="btn btn-success">Go to course</a>
+                
+                </div>
+            </div>
+            
+            {% endfor %}
+            
+            {% else %}
+            <div class="white-box">
+                You have no course available
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock content %}

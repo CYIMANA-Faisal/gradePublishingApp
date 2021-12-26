@@ -5,8 +5,8 @@ from .models import Department, Course, Grade, School, User, Group, Claim
 
 class UserAdmin(admin.ModelAdmin):
     model = User
-    fields = ['names', 'email','reg_number', 'level', 'password','group','admin','staff','active','department']
-    list_display = ('id', 'names', 'email','reg_number', 'level', 'password','group','admin','staff','active','department')
+    fields = ['names', 'email','reg_number', 'level', 'password','group','admin','staff','active','department','is_approved']
+    list_display = ('id', 'names', 'email','reg_number', 'level', 'password','group','admin','staff','active','department','is_approved')
 
 class GroupAdmin(admin.ModelAdmin):
     model = Group
@@ -40,7 +40,7 @@ class ClaimAdmin(admin.ModelAdmin):
 class GradeAdmin(admin.ModelAdmin):
     model = Grade
     fields = ['course', 'student', 'cat', 'exam']
-    list_display = ('id', 'course', 'cat', 'exam', 'created_at', 'updated_at')
+    list_display = ('id', 'course','student', 'cat', 'exam', 'created_at', 'updated_at')
 
 
 admin.site.register(Department, DepartmentAdmin)

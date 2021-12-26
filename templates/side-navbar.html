@@ -18,36 +18,40 @@
             <span class="hide-menu">Dashboard</span>
           </a>
         </li>
-        {% comment %} <li class="sidebar-item">
-          <a
-            class="sidebar-link waves-effect waves-dark sidebar-link"
-            href="/departments"
-            aria-expanded="false"
-          >
-            <i class="fa fa-font" aria-hidden="true"></i>
-            <span class="hide-menu">Departments</span>
-          </a>
-        </li> {% endcomment %}
         <li class="sidebar-item">
           <a
             class="sidebar-link waves-effect waves-dark sidebar-link"
-            href="/courses"
+            href="/my_courses"
             aria-expanded="false"
           >
             <i class="fas fa-book" aria-hidden="true"></i>
             <span class="hide-menu">Courses</span>
           </a>
         </li>
+        {% if request.user.group.name == 'student' %}
+          <li class="sidebar-item">
+            <a
+              class="sidebar-link waves-effect waves-dark sidebar-link"
+              href="/departments"
+              aria-expanded="false"
+            >
+              <i class="fas fa-frown" aria-hidden="true"></i>
+              <span class="hide-menu">Raise a claim</span>
+            </a>
+          </li>
+        {% endif %}
+        {% if request.user.group.name == 'student' %}
         <li class="sidebar-item">
           <a
             class="sidebar-link waves-effect waves-dark sidebar-link"
-            href="/departments"
+            href="/grades"
             aria-expanded="false"
           >
-            <i class="fa fa-font" aria-hidden="true"></i>
-            <span class="hide-menu">Marks</span>
+            <i class="fas fa-briefcase" aria-hidden="true"></i>
+            <span class="hide-menu">Grades</span>
           </a>
         </li>
+        {% endif %}
         <li class="sidebar-item">
           <a
             class="sidebar-link waves-effect waves-dark sidebar-link"
