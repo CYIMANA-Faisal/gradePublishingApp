@@ -11,16 +11,50 @@ class Group(models.Model):
         return self.name
 
 
+class School(models.Model):
+    name = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Department(models.Model):
+    name = models.CharField(max_length=200)
+    school = models.ForeignKey(School, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+
 class UserManager(BaseUserManager):
-    def create_user(self, email, names=None,group=5,department=None, password=None,level=None, reg_number=None,  is_active=True, is_staff=False, is_admin=False):
+    def create_user(
+            self,
+            email,
+            names=None,
+            group=None,
+            department=None,
+            password=None,
+            level=None,
+            reg_number=None,
+            is_active=True,
+            is_staff=False,
+            is_admin=False
+    ):
         if not email:
             raise ValueError('Users must have a valid email')
         if not names:
             raise ValueError('Users must have a valid names')
         if not password:
             raise ValueError("You must enter a password")
-        my_group=Group.objects.get(id=group)
-        my_department=Department.objects.get(id=department)
+        my_group = Group.objects.get(id=group)
+        if not is_admin:
+            my_department = Department.objects.get(id=department)
+        else:
+            my_department = department
         email = self.normalize_email(email)
         user_obj = self.model(email=email)
         user_obj.set_password(password)
@@ -35,23 +69,67 @@ class UserManager(BaseUserManager):
         user_obj.save(using=self._db)
         return user_obj
 
-    def create_staffuser(self, email, names=None,group=1,department=None, level=None, reg_number=None, password=None):
+    def create_staffuser(
+            self,
+            email,
+            names=None,
+            group=None,
+            department=None,
+            password=None,
+            level=None,
+            reg_number=None,
+            is_active=True,
+            is_staff=True,
+            is_admin=False
+    ):
         user = self.create_user(
-            email, names=names,group=group,department=department,level=level, reg_number=reg_number, password=password, is_staff=True)
+            email,
+            names=names,
+            group=group,
+            department=department,
+            password=password,
+            level=level,
+            reg_number=reg_number,
+            is_active=is_active,
+            is_staff=is_staff,
+            is_admin=is_admin
+        )
         return user
 
-    def create_superuser(self, email, names=None,group=1,department=None, level=None, reg_number=None, password=None):
-        user = self.create_user(email, names="admin",level='0',group=group,department='department', reg_number='None',
-                                password=password, is_staff=True, is_admin=True)
+    def create_superuser(
+            self,
+            email,
+            names='GradePubAdmin',
+            group=1,
+            department=None,
+            password=None,
+            level=None,
+            reg_number=None,
+            is_active=True,
+            is_staff=True,
+            is_admin=True
+    ):
+        user = self.create_user(
+            email,
+            names=names,
+            group=group,
+            department=department,
+            password=password,
+            level=level,
+            reg_number=reg_number,
+            is_active=is_active,
+            is_staff=is_staff,
+            is_admin=is_admin
+        )
         return user
 
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     names = models.CharField(max_length=255, null=True, blank=True)
-    level = models.CharField(max_length=255, null=True, blank=True,default="0")
-    group= models.ForeignKey(Group, on_delete=models.SET_NULL,null=True,blank=True)
-    department= models.ForeignKey('Department', on_delete=models.SET_NULL,null=True,blank=True)
+    level = models.CharField(max_length=255, null=True, blank=True, default="0")
+    group = models.ForeignKey(Group, on_delete=models.SET_NULL, null=True, blank=True)
+    department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, blank=True)
     reg_number = models.CharField(max_length=255, unique=True, null=True, blank=True)
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
@@ -84,27 +162,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.active
 
 
-class School(models.Model):
-    name = models.CharField(max_length=200)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.name
-
-
-class Department(models.Model):
-    name = models.CharField(max_length=200)
-    school = models.ForeignKey(School, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.name
-
-
 class Course(models.Model):
-
     LEVEL_ONE = '1'
     LEVEL_TWO = '2'
     LEVEL_THREE = '3'
@@ -165,7 +223,3 @@ class Grade(models.Model):
         for field in self._meta.get_fields():
             field_values.append(str(getattr(self, field.name, '')))
         return ' '.join(field_values)
-
-
-
-
