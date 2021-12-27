@@ -66,17 +66,10 @@
                             <div class="card col-sm-4 " style="width: 18rem; border: 1px solid grey; border-radius: 10px;margin-right:6%">
                                 <div class="card-body">
                                 <h5 class="card-title">{{ course.code }}</h5>
-                                {% if request.user.id in grade_ids%}
-                                  {% if request.user.group.name == 'student' %}
-                                  <button class="btn btn-success" disabled>You are enrolled</button>
-                                  {% else %}
-                                  <a href="{% url 'course_statistics' course.id %}" class="btn btn-success">Go to course</a>
-                                  {% endif %}
-                                {% else %}
-                                <a href="{% url 'enroll' course.id %}" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-                                  Enroll Now
-                                </a>
-                                {% endif %}
+                                    <a href="{% url 'course_statistics' course.id %}" class="btn btn-success">Go to course</a>
+                                    <a href="{% url 'enroll' course.id %}" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                                        Enroll Now
+                                    </a>
                                 </div>
                             </div>
                         {% endfor %}

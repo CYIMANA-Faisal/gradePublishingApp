@@ -33,8 +33,8 @@ class CourseAdmin(admin.ModelAdmin):
 
 class ClaimAdmin(admin.ModelAdmin):
     model = Claim
-    fields = ['student', 'course', 'reason', 'payment_slip']
-    list_display = ('id', 'student', 'course', 'reason', 'payment_slip', 'created_at', 'updated_at')
+    fields = ['student', 'course', 'reason', 'is_exam', 'is_cat', 'is_reviewed', 'payment_slip']
+    list_display = ('id', 'student', 'course', 'reason', 'is_exam', 'is_cat', 'is_reviewed', 'payment_slip', 'created_at', 'updated_at')
 
 
 class GradeAdmin(admin.ModelAdmin):

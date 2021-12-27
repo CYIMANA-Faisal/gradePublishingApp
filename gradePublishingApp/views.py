@@ -123,6 +123,7 @@ def courses(request, dep_id, level, sem_id):
         'dep_id': dep_id,
         'level': level,
         'sem_id': sem_id,
+        'grades': grades
     }
     return render(request, 'courses.html', context)
 
@@ -173,6 +174,14 @@ def addCourse(request):
     context = {
     }
     return render(request, 'add-course.html', context)
+
+
+def my_claims(request):
+    claims = Claim.objects.filter(student=request.user.id)
+    context = {
+        'claims': claims
+    }
+    return render(request, 'my_claims.html', context)
 
 
 def page_not_found_view(request, exception):

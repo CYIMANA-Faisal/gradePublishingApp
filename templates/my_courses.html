@@ -11,6 +11,9 @@
     <div class="row">
         <div class="col-sm-12">
             {% if courses %}
+            <ul class="list-group">
+                <li class="list-group-item">You have no courses you are registered in</li>
+            </ul>
             {% for course in courses %}
 
             <div class="card col-sm-4 " style="width: 18rem; border: 1px solid grey; border-radius: 10px;margin-right:6%">

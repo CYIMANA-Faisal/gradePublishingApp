@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block pagetitle %}
+    My claims
+{% endblock pagetitle %}
+
+{% block breadcumb %}
+   My claims
+{% endblock breadcumb %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+          <div class="white-box">
+            {% if claims %}
+                <div class="table-responsive">
+                    <table class="table text-nowrap">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">Course</th>
+                                <th class="border-top-0">Claimed In CAT</th>
+                                <th class="border-top-0">Claimed In EXAM</th>
+                                <th class="border-top-0">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for claim in claims %}
+                                <tr>
+                                    <td>{{claim.course.code}}</td>
+                                    <td>{{claim.is_exam}}</td>
+                                    <td>{{claim.is_cat}}</td>
+                                    <td>
+                                        {% if claim.is_reviewed %}
+                                            <p class="text-success">reviewed</p>
+                                        {% else %}
+                                            <p class="text-danger">pending</p>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+              <ul class="list-group">
+                    <li class="list-group-item">So far you have no claims</li>
+              </ul>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

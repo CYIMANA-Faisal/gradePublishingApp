@@ -2,6 +2,9 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 from myapp.views import *
+from django.conf.urls.static import static
+from django.conf import  settings
+
 urlpatterns = [
     path('', login, name='login'),
     path('logout/', logout, name='logout'),
@@ -20,6 +23,9 @@ urlpatterns = [
     path('courses/<str:dep_id>/<str:level>/<str:sem_id>', views.courses, name='courses'),
     path('my_courses/', views.my_courses, name='my_courses'),
     path('courses/add', views.addCourse, name='addCourse'),
+    path('my_claims/', views.my_claims, name='my_claims'),
+    path('raise_claim/', raise_claim, name='raise_claim'),
     path('admin/', admin.site.urls),
 ]
 handler404 = "gradePublishingApp.views.page_not_found_view"
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT )

@@ -102,3 +102,31 @@ def update_password(request):
 
         else:
             return render(request, '../templates/profile.html', {'error': True})
+
+def raise_claim(request):
+    grades = Grade.objects.filter(student=request.user.id)
+    course_ids = []
+    for grade in grades:
+        course_ids.append(grade.course.id)
+    courses = Course.objects.filter(id__in=course_ids)
+
+    if request.method == 'GET':
+        context = {
+            'courses': courses
+        }
+        return render(request, '../templates/raise-claim.html', context)
+    if request.method == 'POST':
+        cliam = {
+            'student': request.user.id,
+            'course': request.POST['course_id'],
+            'is_cat': request.POST['cat_claim'],
+            'is_cat': request.POST['exam_claim'],
+            'reason': request.POST['reason'],
+            'payment_slip': request.POST['payment_slip']
+        }
+        print(cliam)
+        context = {
+            'courses': courses,
+            'sent': ''
+        }
+        return render(request, '../templates/raise-claim.html', context)

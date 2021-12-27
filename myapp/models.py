@@ -174,12 +174,14 @@ class Course(models.Model):
     LEVEL_TWO = '2'
     LEVEL_THREE = '3'
     LEVEL_FOUR = '4'
+    LEVEL_FIVE = '5'
 
     LEVEL = (
         (LEVEL_ONE, '1'),
         (LEVEL_TWO, '2'),
         (LEVEL_THREE, '3'),
         (LEVEL_FOUR, '4'),
+        (LEVEL_FIVE, '5'),
     )
 
     ONE = '1'
@@ -209,12 +211,18 @@ class Claim(models.Model):
     student = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)
     reason = models.CharField(max_length=10000)
-    payment_slip = models.CharField(max_length=5000)
+    is_exam = models.BooleanField(default=False)
+    is_cat = models.BooleanField(default=False)
+    payment_slip = models.ImageField(null=True, blank=True)
+    is_reviewed = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.student
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
 
 class Grade(models.Model):

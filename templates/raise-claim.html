@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block pagetitle %}
+    Raise Claim
+{% endblock pagetitle %}
+
+{% block breadcumb %}
+   Raise Claim
+{% endblock breadcumb %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+          <div class="white-box">
+            <div class="col-lg-12 col-xlg-12 col-md-12 justify-content-center">
+                <div class="card">
+                    <div class="card-body">
+                        <form class="form-horizontal form-material" method='POST' action="{% url 'raise_claim' %}">
+                            {% csrf_token %}
+                            <h4>What are you claiming for?</h4>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="" name="cat_claim">
+                              <label class="form-check-label" >
+                                CAT Marks
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="" name="exam_claim">
+                              <label class="form-check-label" >
+                                CAT Marks
+                              </label>
+                            </div>
+                            <div class="col-auto my-1">
+                              <label class="mr-sm-2" for="inlineFormCustomSelect">Which course?</label>
+                              <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="course_id">
+                                  <option selected>Choose...</option>
+                                  {% for course in courses %}
+                                    <option value={{course.id}}>{{course.code}}</option>
+                                  {% endfor %}
+                              </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Detail your reason for claiming, what has gone wrong?</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="reason"></textarea>
+                            </div>
+                            <form>
+                              <div class="form-group">
+                                <label for="exampleFormControlFile1">Upload the payment slip if claiming for the exam grades</label>
+                                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="payment_slip">
+                              </div>
+                            </form>
+                            <div class="form-group mb-4">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-success">Claim</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+{% endblock content %}

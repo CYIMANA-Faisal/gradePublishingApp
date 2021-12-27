@@ -32,11 +32,21 @@
           <li class="sidebar-item">
             <a
               class="sidebar-link waves-effect waves-dark sidebar-link"
-              href="/departments"
+              href="{% url 'raise_claim' %}"
               aria-expanded="false"
             >
               <i class="fas fa-frown" aria-hidden="true"></i>
               <span class="hide-menu">Raise a claim</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a
+              class="sidebar-link waves-effect waves-dark sidebar-link"
+              href="{% url 'my_claims' %}"
+              aria-expanded="false"
+            >
+              <i class="fas fa-frown" aria-hidden="true"></i>
+              <span class="hide-menu">My Claims</span>
             </a>
           </li>
         {% endif %}
