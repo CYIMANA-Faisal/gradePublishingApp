@@ -20,11 +20,11 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('departments/<str:school_id>/', views.departments, name='departments'),
     path('levels/<str:dep_id>/', views.levels, name='levels'),
-    path('courses/<str:dep_id>/<str:level>/<str:sem_id>', views.courses, name='courses'),
+    path('courses/year/<str:year_id>', views.courses, name='courses'),
     path('my_courses/', views.my_courses, name='my_courses'),
-    path('courses/add', views.addCourse, name='addCourse'),
+    path('courses/add', views.add_course, name='add_course'),
     path('my_claims/', views.my_claims, name='my_claims'),
-    path('raise_claim/', raise_claim, name='raise_claim'),
+    # path('raise_claim/', raise_claim, name='raise_claim'),
     path('admin/', admin.site.urls),
 ]
 handler404 = "gradePublishingApp.views.page_not_found_view"

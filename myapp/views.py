@@ -7,27 +7,19 @@ from .models import *
 
 # Create your views here.
 def login(request):
-    departments = Department.objects.all()
-    groups = Group.objects.all()
+
     if request.method == "POST":
         user = authenticate(
             email=request.POST['email'], password=request.POST['password'])
         if user is not None:
-            if user.is_approved==True:
-                django_login(request, user)
-                return redirect('dashboard')
-            else:
-                return render(request, '../templates/index.html',
-                          {'error': True, 'message': 'Your account is not activated!', 'groups': groups,
-                           'departments': departments})
+            django_login(request, user)
+            return redirect('dashboard')
         else:
             return render(request, '../templates/index.html',
-                          {'error': True, 'message': 'Invalid Credentials! ', 'groups': groups,
-                           'departments': departments})
-
+                          {'error': True, 'message': 'Invalid Credentials! '})
     else:
         return render(request, '../templates/index.html',
-                      {'error': False, 'message': False, 'groups': groups, 'departments': departments})
+                      {'error': False, 'message': False})
 
 
 def logout(request):
@@ -103,30 +95,30 @@ def update_password(request):
         else:
             return render(request, '../templates/profile.html', {'error': True})
 
-def raise_claim(request):
-    grades = Grade.objects.filter(student=request.user.id)
-    course_ids = []
-    for grade in grades:
-        course_ids.append(grade.course.id)
-    courses = Course.objects.filter(id__in=course_ids)
+# def raise_claim(request):
+#     grades = Grade.objects.filter(student=request.user.id)
+#     course_ids = []
+#     for grade in grades:
+#         course_ids.append(grade.course.id)
+#     courses = Course.objects.filter(id__in=course_ids)
 
-    if request.method == 'GET':
-        context = {
-            'courses': courses
-        }
-        return render(request, '../templates/raise-claim.html', context)
-    if request.method == 'POST':
-        cliam = {
-            'student': request.user.id,
-            'course': request.POST['course_id'],
-            'is_cat': request.POST['cat_claim'],
-            'is_cat': request.POST['exam_claim'],
-            'reason': request.POST['reason'],
-            'payment_slip': request.POST['payment_slip']
-        }
-        print(cliam)
-        context = {
-            'courses': courses,
-            'sent': ''
-        }
-        return render(request, '../templates/raise-claim.html', context)
+#     if request.method == 'GET':
+#         context = {
+#             'courses': courses
+#         }
+#         return render(request, '../templates/raise-claim.html', context)
+#     if request.method == 'POST':
+#         cliam = {
+#             'student': request.user.id,
+#             'course': request.POST['course_id'],
+#             'is_cat': request.POST['cat_claim'],
+#             'is_cat': request.POST['exam_claim'],
+#             'reason': request.POST['reason'],
+#             'payment_slip': request.POST['payment_slip']
+#         }
+#         print(cliam)
+#         context = {
+#             'courses': courses,
+#             'sent': ''
+#         }
+#         return render(request, '../templates/raise-claim.html', context)

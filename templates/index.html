@@ -282,35 +282,10 @@
         <div class="form-container sign-up-container">
             <form action="{% url 'registration' %}" method="POST">
                 {% csrf_token %}
-                <h1>Create Account</h1>
-                <input type="text" name="names" placeholder="Names" required/>
-                <input type="email" name="email" placeholder="Email" required/>
+                <h1>Login as student</h1>
+                <input type="text" name="names" placeholder="Registration number" required/>
                 <input type="password" name="password" placeholder="Password" required/>
-                <input type="text" name="reg_number" placeholder="Registration Number" />
-                <select name="department" required>
-                    <option value="">Select Department</option>
-                    {% for department in departments %}
-                    <option value="{{department.id}}">{{department.name}}</option>
-                    {% endfor %}
-                    
-                </select>
-                <select name="group" required>
-                    <option value="">Select Group</option>
-                    {% for group in groups %}
-                        {% ifnotequal group.id 1 %}
-                            <option value="{{group.id}}">{{group.name}}</option>
-                        {% endifnotequal %}
-                    {% endfor %}
-                    
-                </select>
-                <select name="level">
-                    <option value="">Select Level</option>
-                    <option value="1">Level 1</option>
-                    <option value="2">Level 2</option>
-                    <option value="3">Level 3</option>
-                    <option value="4">Level 4</option>
-                </select>
-                <button>Sign Up</button>
+                <button>Login</button>
             </form>
         </div>
         <div class="form-container sign-in-container">
@@ -320,20 +295,20 @@
                 <input type="email" name="email" placeholder="Email" required/>
                 <input type="password" name="password" placeholder="Password" required/>
 <!--                <a href="#">Forgot your password?</a>-->
-                <button>Sign In</button>
+                <button>Login</button>
             </form>
         </div>
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
-                    <h1>Welcome Back!</h1>
-                    <p>To keep connected with us please login with your personal info</p>
-                    <button class="ghost" id="signIn">Sign In</button>
+                    <h1>Do you want to login as staff?</h1>
+                    <p>Click the button bellow</p>
+                    <button class="ghost" id="signIn">Click here</button>
                 </div>
                 <div class="overlay-panel overlay-right">
-                    <h1>Hello, Friend!</h1>
-                    <p>Enter your personal details and start journey with us</p>
-                    <button class="ghost" id="signUp">Sign Up</button>
+                    <h1>Do you want to login as student?</h1>
+                    <p>Click the button bellow</p>
+                    <button class="ghost" id="signUp">Click here</button>
                 </div>
             </div>
         </div>

@@ -13,8 +13,8 @@
         <div class="col-md-12">
           <div class="white-box">
                 <ul class="list-group">
-                    {% for school in schools %}
-                        <li class="list-group-item"><a href="{% url 'departments' school_id=school.id %}">{{ school.name }}</a></li>
+                    {% for year in years %}
+                        <li class="list-group-item"><a href="{% url 'courses' year_id=year.id %}">{{ year.name }}</a></li>
                     {% endfor %}
                 </ul>
           </div>

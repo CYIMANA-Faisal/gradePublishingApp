@@ -7,105 +7,92 @@
 - model: myapp.group
   pk: 2
   fields:
-    name: dean
-    created_at: "2013-03-16T17:41:28+00:00"
-    updated_at: "2013-03-17T23:36:12+00:00"
-- model: myapp.group
-  pk: 3
-  fields:
     name: hod
     created_at: "2013-03-16T17:41:28+00:00"
     updated_at: "2013-03-17T23:36:12+00:00"
 - model: myapp.group
-  pk: 4
-  fields:
-    name: instructor
-    created_at: "2013-03-16T17:41:28+00:00"
-    updated_at: "2013-03-17T23:36:12+00:00"
-- model: myapp.group
-  pk: 5
-  fields:
-    name: student
-    created_at: "2013-03-16T17:41:28+00:00"
-    updated_at: "2013-03-17T23:36:12+00:00"
-# Start of the school data
-- model: myapp.school
-  pk: 1
-  fields:
-    name: 'School of Information and Communication Technology-SoICT'
-    created_at: "2013-03-16T17:41:28+00:00"
-    updated_at: "2013-03-17T23:36:12+00:00"
-- model: myapp.school
-  pk: 2
-  fields:
-    name: 'School of Engineering-SoE'
-    created_at: "2013-03-16T17:41:28+00:00"
-    updated_at: "2013-03-17T23:36:12+00:00"
-- model: myapp.school
   pk: 3
   fields:
-    name: 'School of Mining and Geology - SMG'
+    name: lecture
     created_at: "2013-03-16T17:41:28+00:00"
     updated_at: "2013-03-17T23:36:12+00:00"
-- model: myapp.school
+# Start of year data
+- model: myapp.year
+  pk: 1
+  fields:
+    name: 'Year 1'
+    created_at: "2013-03-16T17:41:28+00:00"
+    updated_at: "2013-03-17T23:36:12+00:00"
+- model: myapp.year
+  pk: 2
+  fields:
+    name: 'Year 2'
+    created_at: "2013-03-16T17:41:28+00:00"
+    updated_at: "2013-03-17T23:36:12+00:00"
+- model: myapp.year
+  pk: 3
+  fields:
+    name: 'Year 3'
+    created_at: "2013-03-16T17:41:28+00:00"
+    updated_at: "2013-03-17T23:36:12+00:00"
+- model: myapp.year
   pk: 4
   fields:
-    name: 'School of Architecture and the Built Environment - SABE'
+    name: 'Year 4'
     created_at: "2013-03-16T17:41:28+00:00"
     updated_at: "2013-03-17T23:36:12+00:00"
-- model: myapp.school
+- model: myapp.year
   pk: 5
   fields:
-    name: 'School of Science - SoS'
+    name: 'Year 5'
     created_at: "2013-03-16T17:41:28+00:00"
     updated_at: "2013-03-17T23:36:12+00:00"
 # Start of department data
 - model: myapp.department
   pk: 1
   fields:
-    name: 'Department of Computer and Software Engineering'
-    school: 1
+    name: 'ADMINISTRATION'
     created_at: "2013-03-16T17:41:28+00:00"
     updated_at: "2013-03-17T23:36:12+00:00"
 - model: myapp.department
   pk: 2
   fields:
-    name: 'Department of Computer Science'
-    school: 1
+    name: 'Department of Computer and Software Engineering'
     created_at: "2013-03-16T17:41:28+00:00"
     updated_at: "2013-03-17T23:36:12+00:00"
 - model: myapp.department
   pk: 3
   fields:
-    name: 'Department Information Systems'
-    school: 1
+    name: 'Department of Computer Science'
     created_at: "2013-03-16T17:41:28+00:00"
     updated_at: "2013-03-17T23:36:12+00:00"
 - model: myapp.department
   pk: 4
   fields:
-    name: 'Department of Information Technology'
-    school: 1
+    name: 'Department Information Systems'
     created_at: "2013-03-16T17:41:28+00:00"
     updated_at: "2013-03-17T23:36:12+00:00"
 - model: myapp.department
   pk: 5
   fields:
-    name: 'Department of Electrical and Electronics Engineering'
-    school: 2
+    name: 'Department of Information Technology'
     created_at: "2013-03-16T17:41:28+00:00"
     updated_at: "2013-03-17T23:36:12+00:00"
 - model: myapp.department
   pk: 6
   fields:
-    name: 'Department of MEE'
-    school: 2
+    name: 'Department of Electrical and Electronics Engineering'
     created_at: "2013-03-16T17:41:28+00:00"
     updated_at: "2013-03-17T23:36:12+00:00"
 - model: myapp.department
   pk: 7
   fields:
+    name: 'Department of MEE'
+    created_at: "2013-03-16T17:41:28+00:00"
+    updated_at: "2013-03-17T23:36:12+00:00"
+- model: myapp.department
+  pk: 8
+  fields:
     name: 'Department of Civil, Environmental and Geomatic Engineering'
-    school: 2
     created_at: "2013-03-16T17:41:28+00:00"
     updated_at: "2013-03-17T23:36:12+00:00"
