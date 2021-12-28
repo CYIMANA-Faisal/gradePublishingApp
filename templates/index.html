@@ -280,10 +280,10 @@
     {% endif %}
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="{% url 'registration' %}" method="POST">
+            <form action="{% url 'student_login' %}" method="POST">
                 {% csrf_token %}
                 <h1>Login as student</h1>
-                <input type="text" name="names" placeholder="Registration number" required/>
+                <input type="text" name="reg_number" placeholder="Registration number" required/>
                 <input type="password" name="password" placeholder="Password" required/>
                 <button>Login</button>
             </form>
@@ -294,7 +294,6 @@
                 <h1>Sign in</h1>
                 <input type="email" name="email" placeholder="Email" required/>
                 <input type="password" name="password" placeholder="Password" required/>
-<!--                <a href="#">Forgot your password?</a>-->
                 <button>Login</button>
             </form>
         </div>

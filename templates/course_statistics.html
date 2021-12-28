@@ -18,21 +18,35 @@
                 </div>
             </div>
             {% if request.user.group.name == 'hod' %}
-                <div class="form-group mb-4 col-sm-4">
-                    <div class="col-sm-12">
-                        <button class="btn btn-success">Upload marks</button>
-                    </div>
+                <form action="{% url 'course_statistics' course_id %}" method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <input type="file"
+                         title="Upload excel file"
+                         name="excel_file"
+                         style="border: 1px solid black; padding: 5px;"
+                         required="required">
+                  <p>
+                  <input type="submit"
+                         value="Upload"
+                         class="btn btn-primary"
+                         style="border: 1px solid green; padding:5px; border-radius: 2px; cursor: pointer;">
+                </form>
+            {% endif %}
+            {% if uploaded %}
+                <div class="alert alert-success" role="alert">
+                    Marks has been uploaded successfully
                 </div>
             {% endif %}
             <div class="table-responsive">
                 <table class="table text-nowrap">
                     <thead>
                         <tr>
-                            <th class="border-top-0">Course</th>
+                            <th class="border-top-0">Course Code</th>
                             <th class="border-top-0">Student</th>
                             <th class="border-top-0">RegNo</th>
-                            <th class="border-top-0">Cat marks</th>
-                            <th class="border-top-0">Exam marks</th>
+                            <th class="border-top-0">Cat marks / 50</th>
+                            <th class="border-top-0">Exam marks /50</th>
+                            <th class="border-top-0">Total /100</th>
                             <th class="border-top-0">Status</th>
                         </tr>
                     </thead>
@@ -41,12 +55,15 @@
                         {% with total=grade.cat|add:grade.exam %}
                         <tr>
                             <td>{{grade.course.code}}</td>
-                            <td>{{grade.student.names}}</td>
+                            <td>{{grade.student.name}}</td>
                             <td>{{grade.student.reg_number}}</td>
                             <td>{{grade.cat}}</td>
                             <td>{{grade.exam}}</td>
+                            <td>{{total}}</td>
                             {% if total > 50 %}
                                 <td><a class="btn btn-success" disabled>Pass</a></td>
+                            {% elif total == 0 %}
+                                <td><a class="btn btn-primary" disabled>No records</a></td>
                             {% else %}
                                 <td><a class="btn btn-danger" disabled>Fail</a></td>
                             {% endif %}
