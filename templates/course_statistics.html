@@ -37,7 +37,8 @@
                     Marks has been uploaded successfully
                 </div>
             {% endif %}
-            <div class="table-responsive">
+            <input type="text" id="myInput" onkeyup='tableSearch()' placeholder="Search by registration number">
+            <div class="table-responsive" id="myTable">
                 <table class="table text-nowrap">
                     <thead>
                         <tr>
@@ -74,6 +75,30 @@
                         
                     </tbody>
                 </table>
+                <script type="application/javascript">
+                    function tableSearch() {
+                        let input, filter, table, tr, td, txtValue;
+            
+                        //Intialising Variables
+                        input = document.getElementById("myInput");
+                        filter = input.value.toUpperCase();
+                        table = document.getElementById("myTable");
+                        tr = table.getElementsByTagName("tr");
+            
+                        for (let i = 0; i < tr.length; i++) {
+                            td = tr[i].getElementsByTagName("td")[2];
+                            if (td) {
+                                txtValue = td.textContent || td.innerText;
+                                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                    tr[i].style.display = "";
+                                } else {
+                                    tr[i].style.display = "none";
+                                }
+                            }
+                        }
+            
+                    }
+                </script>
             </div>
           </div>
         </div>

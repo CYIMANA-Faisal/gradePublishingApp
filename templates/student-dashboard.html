@@ -182,7 +182,8 @@
                 <div class="row">
                     <div class="col-md-12">
                       <div class="white-box">
-                              <div class="table-responsive">
+                        <input type="text" id="myInput" onkeyup='tableSearch()' placeholder="Search by registration number">
+                              <div class="table-responsive" id="myTable">
                                 <table class="table text-nowrap">
                                     <thead>
                                         <tr>
@@ -214,7 +215,7 @@
                                          {% endwith %}
                                         {% endfor %}
                                         <tr>
-                                          <td> Total Average: {{total_average}}</td>
+                                          <td> Total Average: {{total_average}}%</td>
                                           
                                         </tr>     
                                     </tbody>
@@ -282,5 +283,29 @@
     <script src="{% static 'js/sidebarmenu.js' %}"></script>
     <!--Custom JavaScript -->
     <script src="{% static 'js/custom.js' %}"></script>
+    <script type="application/javascript">
+      function tableSearch() {
+          let input, filter, table, tr, td, txtValue;
+
+          //Intialising Variables
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("myTable");
+          tr = table.getElementsByTagName("tr");
+
+          for (let i = 0; i < tr.length; i++) {
+              td = tr[i].getElementsByTagName("td")[0];
+              if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                      tr[i].style.display = "";
+                  } else {
+                      tr[i].style.display = "none";
+                  }
+              }
+          }
+
+      }
+  </script>
   </body>
 </html>
